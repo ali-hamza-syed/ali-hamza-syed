@@ -1,0 +1,29 @@
+//Sign UP Code
+
+app.post ("/signup",(req,res) =>
+{
+    if(req.query.email  && req.query.firstname && req.query.lastname && req.query.password)
+    {
+    con.query(`INSERT INTO user1 (email,firstname,lastname,password) VALUES (?,?,?,?)`, 
+    [
+        req.query.email,req.query.firstname,req.query.lastname,req.query.password
+    ],
+    (err,result,fields) =>
+    {
+        if(err)
+        {
+            console.log("...ERROR... "+ err);
+            return res.send("<h1>...ERROR... </h1>"+ err)
+        }
+        else{
+        return res.send(req.query.email+' '+req.query.firstname+' '+req.query.lastname+' '+req.query.password+' Inserted Successfully')
+        }
+    });
+}
+else
+{
+    res.send("Please Compelete All Enteries")
+}
+
+
+});
